@@ -128,7 +128,6 @@ class ProductDetailsActivity : BaseActivity(), View.OnClickListener {
         tv_product_details_description.text = product.description
         tv_product_details_stock_quantity.text = product.stock_quantity
 
-
         if(product.stock_quantity.toInt() == 0){
 
             // Hide Progress dialog.
