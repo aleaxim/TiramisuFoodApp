@@ -1,13 +1,16 @@
 package com.myshoppal.ui.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.myshoppal.R
 import com.myshoppal.models.Product
+import com.myshoppal.ui.activities.ProductDetailsActivity
 import com.myshoppal.ui.fragments.ProductsFragment
+import com.myshoppal.utils.Constants
 import com.myshoppal.utils.GlideLoader
 import kotlinx.android.synthetic.main.item_list_layout.view.*
 
@@ -64,6 +67,13 @@ open class MyProductsListAdapter(
                 // Calls the delete function of the ProductsFragment.
                 fragment.deleteProduct(model.product_id)
 
+            }
+
+            holder.itemView.setOnClickListener {
+                // Launch Product details screen.
+                val intent = Intent(context, ProductDetailsActivity::class.java)
+                intent.putExtra(Constants.EXTRA_PRODUCT_ID, model.product_id)
+                context.startActivity(intent)
             }
 
         }

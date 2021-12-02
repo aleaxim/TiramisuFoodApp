@@ -2,12 +2,15 @@ package com.myshoppal.ui.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.myshoppal.R
 import com.myshoppal.models.Product
+import com.myshoppal.ui.activities.ProductDetailsActivity
+import com.myshoppal.utils.Constants
 import com.myshoppal.utils.GlideLoader
 import kotlinx.android.synthetic.main.item_dashboard_layout.view.*
 
@@ -18,6 +21,9 @@ open class DashboardItemsListAdapter(
     private val context: Context,
     private var list: ArrayList<Product>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    // A global variable for OnClickListener interface.
+    private var onClickListener: OnClickListener? = null
 
     /**
      * Inflates the item views which is designed in xml layout file
@@ -56,7 +62,21 @@ open class DashboardItemsListAdapter(
                 holder.itemView.iv_dashboard_item_image
             )
             holder.itemView.tv_dashboard_item_title.text = model.title
-            holder.itemView.tv_dashboard_item_price.text = "$${model.price}"
+            holder.itemView.tv_dashboard_item_price.text = "₱${model.price}"
+
+            // Assign the on click event for item view and pass the required params in the on click function.
+            holder.itemView.setOnClickListener {
+                if (onClickListener != null) {
+                    onClickListener!!.onClick(position, model)
+                }
+            }
+            // Alt way to do the code above
+//            holder.itemView.setOnClickListener {
+//                val intent = Intent(context, ProductDetailsActivity::class.java)
+//                intent.putExtra(Constants.EXTRA_PRODUCT_ID, model.product_id)
+//                context.startActivity(intent)
+//            }
+
         }
     }
 
@@ -65,6 +85,21 @@ open class DashboardItemsListAdapter(
      */
     override fun getItemCount(): Int {
         return list.size
+    }
+
+
+    // Function for OnClickListener where the Interface is the expected parameter and assigned to the global variable.
+    fun setOnClickListener(onClickListener: OnClickListener) {
+        this.onClickListener = onClickListener
+    }
+    /**
+     * An interface for onclick items.
+     */
+    interface OnClickListener {
+
+        //  Function to get the required params when user clicks on the item view in the interface.
+        fun onClick(position: Int, product: Product)
+
     }
 
     /**

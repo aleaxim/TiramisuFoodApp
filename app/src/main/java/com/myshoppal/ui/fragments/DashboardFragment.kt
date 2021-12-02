@@ -10,9 +10,11 @@ import com.myshoppal.R
 import com.myshoppal.firestore.FirestoreClass
 import com.myshoppal.models.Product
 import androidx.recyclerview.widget.GridLayoutManager
+import com.myshoppal.ui.activities.ProductDetailsActivity
 //import com.myshoppal.ui.adapters.DashboardItemsListAdapter
 import com.myshoppal.ui.activities.SettingsActivity
 import com.myshoppal.ui.adapters.DashboardItemsListAdapter
+import com.myshoppal.utils.Constants
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 
 class DashboardFragment : BaseFragment() {
@@ -98,6 +100,21 @@ class DashboardFragment : BaseFragment() {
 
             val adapter = DashboardItemsListAdapter(requireActivity(), dashboardItemsList)
             rv_dashboard_items.adapter = adapter
+
+            // Define the onclick listener here that is defined in the adapter class and handle the click on an item in the base class.
+            adapter.setOnClickListener(object :
+                DashboardItemsListAdapter.OnClickListener {
+                override fun onClick(position: Int, product: Product) {
+
+                    // Launch the product details screen from the dashboard.
+                    val intent = Intent(context, ProductDetailsActivity::class.java)
+                    intent.putExtra(Constants.EXTRA_PRODUCT_ID, product.product_id)
+                    startActivity(intent)
+
+                }
+            })
+
+
         } else {
             rv_dashboard_items.visibility = View.GONE
             tv_no_dashboard_items_found.visibility = View.VISIBLE

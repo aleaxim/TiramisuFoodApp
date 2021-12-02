@@ -34,6 +34,7 @@ object Constants {
     const val USER_PROFILE_IMAGE: String = "user_profile_image"
     const val PRODUCT_IMAGE: String = "Product_Image"
 
+    const val EXTRA_PRODUCT_ID: String = "extra_product_id"
 
 
 
