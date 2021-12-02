@@ -11,8 +11,9 @@ import com.myshoppal.ui.fragments.ProductsFragment
 import com.myshoppal.utils.GlideLoader
 import kotlinx.android.synthetic.main.item_list_layout.view.*
 
-
-// A adapter class for products list items.
+/**
+ * A adapter class for products list items.
+ */
 
 open class MyProductsListAdapter(
     private val context: Context,
@@ -57,20 +58,22 @@ open class MyProductsListAdapter(
             holder.itemView.tv_item_name.text = model.title
             holder.itemView.tv_item_price.text = "₱${model.price}"
 
+            //  Assigning the click event to the delete button.
+            holder.itemView.ib_delete_product.setOnClickListener {
 
-//            holder.itemView.ib_delete_product.setOnClickListener {
-//
-//                fragment.deleteProduct(model.product_id)
+                // Calls the delete function of the ProductsFragment.
+                fragment.deleteProduct(model.product_id)
 
             }
 
         }
+    }
+
     /**
      * Gets the number of items in the list
      */
     override fun getItemCount(): Int {
         return list.size
-
     }
 
     /**
@@ -78,6 +81,7 @@ open class MyProductsListAdapter(
      */
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
 }
+
 
 
 

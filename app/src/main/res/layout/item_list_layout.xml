@@ -36,10 +36,9 @@
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-
+        app:layout_constraintEnd_toStartOf="@id/ib_delete_product"
         app:layout_constraintStart_toEndOf="@id/ll_item_image"
         app:layout_constraintTop_toTopOf="parent">
-<!--        app:layout_constraintEnd_toStartOf="@id/ib_delete_product"-->
 
         <com.myshoppal.utils.MSPTextViewBold
             android:id="@+id/tv_item_name"
@@ -60,17 +59,17 @@
             tools:text="$100.00" />
     </LinearLayout>
 
-<!--    <ImageButton-->
-<!--        android:id="@+id/ib_delete_product"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@android:color/transparent"-->
-<!--        android:contentDescription="@string/content_description"-->
-<!--        android:foreground="?attr/selectableItemBackgroundBorderless"-->
-<!--        android:padding="@dimen/delete_icon_padding"-->
-<!--        android:src="@drawable/ic_vector_delete"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toEndOf="@id/ll_product_details"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+    <ImageButton
+        android:id="@+id/ib_delete_product"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/content_description"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:padding="@dimen/delete_icon_padding"
+        android:src="@drawable/ic_vector_delete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ll_product_details"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

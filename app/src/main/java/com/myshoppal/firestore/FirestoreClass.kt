@@ -306,5 +306,34 @@ class FirestoreClass {
             }
     }
 
+    /**
+     * A function to delete the product from the cloud firestore.
+     */
+    fun deleteProduct(fragment: ProductsFragment, productId: String) {
+
+        mFireStore.collection(Constants.PRODUCTS)
+            .document(productId)
+            .delete()
+            .addOnSuccessListener {
+
+                // TODO Step 4: Notify the success result to the base class.
+                // START
+                // Notify the success result to the base class.
+                fragment.productDeleteSuccess()
+                // END
+            }
+            .addOnFailureListener { e ->
+
+                // Hide the progress dialog if there is an error.
+                fragment.hideProgressDialog()
+
+                Log.e(
+                    fragment.requireActivity().javaClass.simpleName,
+                    "Error while deleting the product.",
+                    e
+                )
+            }
+    }
+
 
 }

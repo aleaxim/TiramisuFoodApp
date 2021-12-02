@@ -37,6 +37,6 @@ class MainActivity : BaseActivity() {
 
         val username = sharedPreferences.getString(Constants.LOGGED_IN_USERNAME, "")!!
         // Set the result to the tv_main.
-//        tv_main.text= "The logged in user is $username."
+        tv_main.text= "The logged in user is $username."
     }
 }
