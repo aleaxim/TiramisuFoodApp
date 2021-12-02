@@ -2,13 +2,20 @@ package com.myshoppal.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.myshoppal.R
+import com.myshoppal.firestore.FirestoreClass
+import com.myshoppal.models.Product
+import androidx.recyclerview.widget.GridLayoutManager
+//import com.myshoppal.ui.adapters.DashboardItemsListAdapter
 import com.myshoppal.ui.activities.SettingsActivity
+import com.myshoppal.ui.adapters.DashboardItemsListAdapter
+import kotlinx.android.synthetic.main.fragment_dashboard.*
 
-class DashboardFragment : Fragment() {
+class DashboardFragment : BaseFragment() {
 
     //private lateinit var dashboardViewModel: DashboardViewModel
 
@@ -18,6 +25,14 @@ class DashboardFragment : Fragment() {
         setHasOptionsMenu(true)
     }
 
+    // Will reload products everytime you go back to dashboard
+    override fun onResume() {
+        super.onResume()
+
+        getDashboardItemsList()
+    }
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -26,8 +41,6 @@ class DashboardFragment : Fragment() {
         //dashboardViewModel = ViewModelProviders.of(this).get(DashboardViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
 
-//        val textView: TextView = root.findViewById(R.id.text_dashboard)
-//            textView.text = "This is the Dashboard Fragment"
         return root
     }
 
@@ -46,5 +59,48 @@ class DashboardFragment : Fragment() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    /**
+     * A function to get the dashboard items list from cloud firestore.
+     */
+    private fun getDashboardItemsList() {
+        // Show the progress dialog.
+        showProgressDialog(resources.getString(R.string.please_wait))
+
+        FirestoreClass().getDashboardItemsList(this@DashboardFragment)
+    }
+
+    /**
+     * A function to get the success result of the dashboard items from cloud firestore.
+     *
+     * @param dashboardItemsList
+     */
+    fun successDashboardItemsList(dashboardItemsList: ArrayList<Product>) {
+
+        // Hide the progress dialog.
+        hideProgressDialog()
+
+        /* For Testing Purposes
+        for (i in dashboardItemsList){
+            Log.i("Item Title", i.title)
+        }*/
+
+
+        // If there are Items / Product
+        if (dashboardItemsList.size > 0) {
+
+            rv_dashboard_items.visibility = View.VISIBLE
+            tv_no_dashboard_items_found.visibility = View.GONE
+
+            rv_dashboard_items.layoutManager = GridLayoutManager(activity, 2)
+            rv_dashboard_items.setHasFixedSize(true)
+
+            val adapter = DashboardItemsListAdapter(requireActivity(), dashboardItemsList)
+            rv_dashboard_items.adapter = adapter
+        } else {
+            rv_dashboard_items.visibility = View.GONE
+            tv_no_dashboard_items_found.visibility = View.VISIBLE
+        }
     }
 }
