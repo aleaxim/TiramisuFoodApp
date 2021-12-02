@@ -11,6 +11,7 @@ object Constants {
     // Collections in Cloud Firestore
     const val USERS: String =  "users"
     const val PRODUCTS: String = "products"
+    const val CART_ITEMS: String = "cart_items"
 
     const val MYSHOPPAL_PREFERENCES: String = "MyShopPalPrefs"
     const val LOGGED_IN_USERNAME: String = "logged_in_username"
@@ -35,6 +36,11 @@ object Constants {
     const val PRODUCT_IMAGE: String = "Product_Image"
 
     const val EXTRA_PRODUCT_ID: String = "extra_product_id"
+    const val EXTRA_PRODUCT_OWNER_ID: String = "extra_product_owner_id"
+
+    const val CART_QUANTITY: String = "cart_quantity"
+    const val DEFAULT_CART_QUANTITY: String = "1"
+    const val PRODUCT_ID: String = "product_id"
 
 
 

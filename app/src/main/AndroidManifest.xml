@@ -12,19 +12,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <!-- For QEMU pipe 'qemud:network' Error -->
 
+        <!-- For QEMU pipe 'qemud:network' Error -->
         <activity
             android:name=".ui.activities.AddProductActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".ui.activities.ProductDetailsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-
+        <activity
+            android:name=".ui.activities.CartListActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />/>
         <activity
             android:name=".ui.activities.SettingsActivity"
             android:exported="false"
@@ -63,6 +66,8 @@
             android:name=".ui.activities.UserProfileActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+
+
     </application>
 
 </manifest>

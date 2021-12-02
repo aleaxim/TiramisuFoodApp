@@ -10,6 +10,7 @@ import com.myshoppal.R
 import com.myshoppal.firestore.FirestoreClass
 import com.myshoppal.models.Product
 import androidx.recyclerview.widget.GridLayoutManager
+import com.myshoppal.ui.activities.CartListActivity
 import com.myshoppal.ui.activities.ProductDetailsActivity
 //import com.myshoppal.ui.adapters.DashboardItemsListAdapter
 import com.myshoppal.ui.activities.SettingsActivity
@@ -57,6 +58,10 @@ class DashboardFragment : BaseFragment() {
         when (id) {
             R.id.action_settings -> {
                 startActivity(Intent(activity, SettingsActivity::class.java))
+                return true
+            }
+            R.id.action_cart -> {
+                startActivity(Intent(activity, CartListActivity::class.java))
                 return true
             }
         }
@@ -109,6 +114,7 @@ class DashboardFragment : BaseFragment() {
                     // Launch the product details screen from the dashboard.
                     val intent = Intent(context, ProductDetailsActivity::class.java)
                     intent.putExtra(Constants.EXTRA_PRODUCT_ID, product.product_id)
+                    intent.putExtra(Constants.EXTRA_PRODUCT_OWNER_ID, product.user_id)
                     startActivity(intent)
 
                 }
